@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon, faStarAndCrescent, faGasPump } from '@fortawesome/free-solid-svg-icons';
@@ -10,12 +10,6 @@ import { ThemeContextType } from '@/app/lib/definition';
 const Header: React.FC = () => {
 
   const { theme, setTheme } = useContext(ThemeConext) as ThemeContextType;
-
-  useEffect(() => {
-    if (typeof window !== 'undefined' && (window as any).Flowbite) {
-      (window as any).Flowbite();
-    }
-  }, []);
 
   return (
     <section className="d-none d-lg-block sticky top-0 z-[1020] border-bottom border-b-[var(--bs-border-color)] bg-[var(--bs-bg-color)] py-1">
