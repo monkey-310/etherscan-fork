@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
   }
 
   return (
-    <footer id="masterFooter" className='bg-[var(--bs-bg-footer)] mt-auto text-[var(--bs-text-color)]'>
+    <footer className='bg-[var(--bs-bg-footer)] mt-auto text-[var(--bs-text-color)]'>
       <div className='container-xxl'>
         <div className="flex justify-between lg:w-full md:items-center md:flex py-6">
           <div className="flex justify-between w-full">

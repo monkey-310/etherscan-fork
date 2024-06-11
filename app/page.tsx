@@ -1,10 +1,10 @@
 'use client';
 
 import Script from 'next/script';
-import Header from "./components/sections/header";
-import Navbar from "./components/sections/navbar";
-import Main from './components/sections/main';
-import Footer from "./components/sections/footer";
+import Header from "./components/header";
+import Navbar from "./components/navbar";
+import Main from './components/main';
+import Footer from "./components/footer";
 
 
 export default function Home() {

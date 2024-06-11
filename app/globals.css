@@ -19,6 +19,7 @@
   --bs-search-section-color: rgb(8, 29, 53);
   --bs-secondary-color: #6c757d;
   --bs-bg-color: white;
+  --bs-shadow: 0 0.5rem 1.2rem rgb(189 197 209 / 20%);
   --bs-text-color: rgba(55, 65, 81, 1);
   --bs-toggle-button-hover: #e9ecef;
   --bs-bg-icon-card: rgb(248, 249, 250);
@@ -30,6 +31,7 @@
   --bs-search-section-color: rgb(10, 10, 10);
   --bs-secondary-color: #bbb;
   --bs-bg-color: #111111;
+  --bs-shadow: 0 0.5rem 1.2rem rbga(82, 85, 92, 0.15);
   --bs-text-color: rgba(229, 231, 235, 1);
   --bs-toggle-button-hover: rgba(55, 65, 81, 1);
   --bs-bg-icon-card: rgb(21, 21, 21);
@@ -41,6 +43,7 @@
   --bs-search-section-color: rgb(11, 17, 32);
   --bs-secondary-color: #93a3b8;
   --bs-bg-color: #111a2e;
+  --bs-shadow: 0 0.5rem 1.2rem rbga(82, 85, 92, 0.15);
   --bs-text-color: rgba(229, 231, 235, 1);
   --bs-toggle-button-hover: rgba(55, 65, 81, 1);
   --bs-bg-icon-card: rgb(22, 33, 56);
@@ -67,51 +70,16 @@ footer {
 }
 
 @layer components {
-  .d-none {
-    @apply hidden
-  }
-
-  .d-lg-block {
-    @apply min-[992px]:block
-  }
-
-  .border-bottom {
-    border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
-  }
-
   .container-xxl {
     @apply w-full px-3 mx-auto md:px-5 min-[1400px]:max-w-[1400px]
   }
 
-  .align-items-sm-center {
-    @apply sm:items-center
-  }
-
-  .fs-sm {
-    font-size: 0.78515625rem;
-  }
-
-
   .nav-item {
-    @apply text-black text-sm py-2 md:py-3
+    @apply text-sm py-2 md:py-3
   }
 
   .nav-link {
-    @apply flex items-center md:inline md:py-5 hover:text-[rgba(var(--navbar-active-color))]
-  }
-
-  .dropdown-menu {
-    @apply hidden px-3 group-hover:flex group-hover:scale-100 transition-transform rounded-b-lg hover:flex md:min-w-[230px] flex-col mt-3 md:mt-0 border-[#e9ecef] bg-white md:drop-shadow-lg static md:absolute py-3 top-14 md:border-t-[3px] md:border-[#0784c3] md:rounded-b-lg z-10 dark:bg-[#0a0a0a]
-  }
-
-  .dropdonw-item {
-    @apply text-xs px-3 py-2 text-[#212529] hover:rounded-md hover:bg-[#e9ecef] dark:text-[#bbb] dark:hover:bg-[#252525] dark:hover:text-[#f5f5f5]
-  }
-
-  .dropdown {
-    border: 1px solid #e9ecef;
-    border-bottom-right-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
+    @apply flex items-center md:inline md:py-3 hover:text-[rgba(var(--navbar-active-color))]
   }
 
   .row {
@@ -124,8 +92,6 @@ footer {
     flex-shrink: 0;
     width: 100%;
     max-width: 100%;
-    padding-right: 0.75rem;
-    padding-left: 0.75rem;
   }
 
   .card {
@@ -138,7 +104,7 @@ footer {
     background-clip: border-box;
     border: 1px solid var(--bs-border-color);
     border-radius: 0.75rem;
-    box-shadow: var(--bs-card-box-shadow);
+    box-shadow: var(--bs-shadow);
   }
 
   .card-header {
@@ -167,13 +133,6 @@ footer {
 
   .card-footer:last-child {
     border-radius: 0 0 calc(0.75rem - 1px) calc(0.75rem - 1px);
-  }
-
-  .scrollbar-custom {
-    --bs-scrollbar-track-bg-color: #f8f9fa;
-    --bs-scrollbar-track-shadow-color: #e9ecef;
-    --bs-scrollbar-thumb-bg-color: #ced4da;
-    --bs-scrollbar-thumb-hover-bg-color: #adb5bd;
   }
 
   .btn {
@@ -239,29 +198,6 @@ footer {
     font-weight: 400;
   }
 
-  .badge {
-    --bs-badge-padding-x: 0.75em;
-    --bs-badge-padding-y: 0.25em;
-    --bs-badge-font-size: 0.75em;
-    --bs-badge-font-weight: 700;
-    --bs-badge-color: #fff;
-    --bs-badge-border-radius: 0.375rem;
-    display: inline-block;
-    padding: var(--bs-badge-padding-y) var(--bs-badge-padding-x);
-    font-size: var(--bs-badge-font-size);
-    font-weight: var(--bs-badge-font-weight);
-    line-height: 1;
-    color: var(--bs-badge-color);
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: var(--bs-badge-border-radius);
-  }
-
-  .border-opacity-15 {
-    --bs-border-opacity: 0.15;
-  }
-
   .text-muted {
     color: var(--bs-secondary-color);
   }
@@ -272,10 +208,6 @@ footer {
 
   .bg-image {
     background-image: url('/imgs/abstract-shapes-20.svg');
-  }
-
-  .bg-light {
-    @apply bg-[#f8f9fa]
   }
 
   .link-muted {

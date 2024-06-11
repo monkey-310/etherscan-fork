@@ -12,12 +12,12 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
   useEffect(() => {
     let temp = localStorage.getItem('theme');
     if (!temp) {
+      document.documentElement.className = "light";
       setTheme('light');
       localStorage.setItem("theme", "light");
-      document.documentElement.className = "light";
     } else {
-      setTheme(temp);
       document.documentElement.className = temp;
+      setTheme(temp);
     }
   }, []);
 

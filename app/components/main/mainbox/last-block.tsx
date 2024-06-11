@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState, useEffect, useContext } from 'react';
 import { Block } from 'viem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,7 +6,7 @@ import { faGauge } from '@fortawesome/free-solid-svg-icons';
 import { EthereumContext } from '@/app/ethereum-provider';
 import { EthereumContextType } from '@/app/lib/definition';
 
-export default function LastBlock() {
+const LastBlock: React.FC = () => {
   const { client } = useContext(EthereumContext) as EthereumContextType;
   const [finalBlock, setFinalBlock] = useState<Block | null>(null);
   const [safeBlock, setSafeBlock] = useState<Block | null>(null);
@@ -50,3 +49,4 @@ export default function LastBlock() {
     </div>
   )
 }
+export default LastBlock;

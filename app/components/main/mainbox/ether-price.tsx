@@ -16,7 +16,7 @@ const chainlinkEthUsdAbi = [
 const provider = new ethers.JsonRpcProvider('https://mainnet.infura.io/v3/4f17c7ed82ea4b5cb7632ef7f8d0ab75')
 const priceFeed = new ethers.Contract(chainlinkEthUsdAddress, chainlinkEthUsdAbi, provider);
 
-export default function EtherPrice() {
+const EtherPrice: React.FC = () => {
   const [ethPrice, setEthPrice] = useState<string | null>(null);
   const { theme } = useContext(ThemeConext) as ThemeContextType;
 
@@ -54,3 +54,5 @@ export default function EtherPrice() {
     </div>
   )
 }
+
+export default EtherPrice;

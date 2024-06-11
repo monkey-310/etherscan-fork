@@ -2,12 +2,11 @@
 
 import React from 'react';
 
-const Search: React.FC = () => {
+const SearchForm: React.FC = () => {
   return (
     <form action="/search" className="mb-3" method="get">
-      <div className="flex gap-2 p-1.5 m-1 border rounded-lg bg-[var(--bs-bg-color)] border-[var(--bs-border-color)]">
-        <select
-          className="d-none sm:block form-select text-sm border-transparent focus:border-transparent focus:ring-0 focus:rounded-lg  bg-[var(--bs-bg-color)] text-[var(--bs-text-color)] mr-2"
+      <div className="flex gap-2 p-1.5 m-0 border rounded-lg bg-[var(--bs-bg-color)] border-[var(--bs-border-color)]">
+        <select className="hidden sm:block form-select text-sm border-transparent focus:border-transparent focus:ring-0 focus:rounded-lg  bg-[var(--bs-bg-color)] text-[var(--bs-text-color)] mr-2"
         >
           <option value="0">All Filters</option>
           <option value="1">Addresses</option>
@@ -36,4 +35,4 @@ const Search: React.FC = () => {
   );
 };
 
-export default Search;
+export default SearchForm;

@@ -36,7 +36,7 @@ const Chart: React.FC = () => {
         text: '',
       },
       labels: {
-        step: 7,
+        step: 21,
         enabled: true,
         style: {
           color: 'var(--bs-text-color)'

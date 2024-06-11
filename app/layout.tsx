@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
-import "font-awesome/css/font-awesome.min.css";
-
 import "./globals.css";
+import "font-awesome/css/font-awesome.min.css";
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+config.autoAddCss = false;
+
 import ThemeProvider from "./theme-provider";
 import EthereumProvider from "./ethereum-provider";
 

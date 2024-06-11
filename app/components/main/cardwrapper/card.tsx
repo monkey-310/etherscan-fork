@@ -1,13 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Block } from 'viem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
 import CustomizeModal from './customize-modal';
 import { BlockData } from '@/app/lib/definition';
 
-export default function Card({ isLoading, blocks }: { isLoading: boolean, blocks: BlockData[] | null }) {
+function Card({ isLoading, blocks }: { isLoading: boolean, blocks: BlockData[] | null }) {
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
 
   const spinner = (
@@ -45,7 +44,7 @@ export default function Card({ isLoading, blocks }: { isLoading: boolean, blocks
               <div className='row'>
                 <div className='sm:w-1/3'>
                   <div className='flex items-center gap-2'>
-                    <div className='w-12 h-12 items-center justify-center rounded-lg sm:flex bg-light d-none text-muted p-3 bg-[var(--bs-bg-icon-card)]'>
+                    <div className='w-12 h-12 items-center justify-center rounded-lg sm:flex hidden text-muted p-3 bg-[var(--bs-bg-icon-card)]'>
                       <i className='fa fa-cube'></i>
                     </div>
                     <div className='flex flex-row sm:flex-col sm:items-start sm:gap-0 items-center gap-1'>
@@ -61,8 +60,8 @@ export default function Card({ isLoading, blocks }: { isLoading: boolean, blocks
                   <div className='pr-0 sm:pr-2'>
                     <div className='flex flex-wrap gap-1'>
                       Fee Recipient
-                      <a href="#" className='text-[#0783c4]'>
-                        <span>0x1129846C...a4658C0EE</span>
+                      <a href="/" className='text-[#0783c4]'>
+                        <span></span>
                       </a>
                     </div>
                     <a href="" className='text-[#0783c4]'>{block.txns} txns</a>
@@ -90,3 +89,5 @@ export default function Card({ isLoading, blocks }: { isLoading: boolean, blocks
     </>
   )
 }
+
+export default Card;
