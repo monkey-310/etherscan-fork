@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -11,6 +11,17 @@ const CustomizeModal: React.FC<{ isShowModal: boolean, setIsShowModal: (isShowMo
     e.preventDefault();
     setIsShowModal(false);
   };
+
+  useEffect(() => {
+    if (isShowModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isShowModal]);
 
   return (
     <div className={clsx('z-[1400] modal-overlay ', isShowModal ? "block" : "hidden")}>
