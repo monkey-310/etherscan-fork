@@ -12,7 +12,7 @@ const MarketCap = () => {
         <div className='text-cap mb-[1px]'>
           Market Cap
         </div>
-        <a href="#" className='text-4'>
+        <a href="#" className='text-[15px]'>
           $455,258,576,856.00
         </a>
       </div>

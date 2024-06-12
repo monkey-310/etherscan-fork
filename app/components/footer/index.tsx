@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
                     className="absolute z-10 invisible inline-block py-1 px-2 text-xs font-medium text-white transition-opacity duration-300 bg-[#111b36] rounded-md shadow-sm opacity-0 tooltip dark:bg-[#333]"
                   >
                     Twitter
-                    <div className="tooltip-arrow" data-popper-arrow></div>
+                    <div className="tooltip-arrow"></div>
                   </div>
                 </li>
                 <li>
@@ -56,7 +56,7 @@ const Footer: React.FC = () => {
                     className="absolute z-10 invisible inline-block py-1 px-2 text-xs font-medium text-white transition-opacity duration-300 bg-[#111b36] rounded-md shadow-sm opacity-0 tooltip dark:bg-[#333]"
                   >
                     Facebook
-                    <div className="tooltip-arrow" data-popper-arrow></div>
+                    <div className="tooltip-arrow"></div>
                   </div>
                 </li>
                 <li>
@@ -74,7 +74,7 @@ const Footer: React.FC = () => {
                     className="absolute z-10 invisible inline-block py-1 px-2 text-xs font-medium text-white transition-opacity duration-300 bg-[#111b36] rounded-md shadow-sm opacity-0 tooltip dark:bg-[#333]"
                   >
                     Reddit
-                    <div className="tooltip-arrow" data-popper-arrow></div>
+                    <div className="tooltip-arrow"></div>
                   </div>
                 </li>
                 <li>
@@ -92,7 +92,7 @@ const Footer: React.FC = () => {
                     className="absolute z-10 invisible inline-block py-1 px-2 text-xs font-medium text-white transition-opacity duration-300 bg-[#111b36] rounded-md shadow-sm opacity-0 tooltip dark:bg-[#333]"
                   >
                     Medium
-                    <div className="tooltip-arrow" data-popper-arrow></div>
+                    <div className="tooltip-arrow"></div>
                   </div>
                 </li>
               </ul>

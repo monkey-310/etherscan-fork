@@ -12,13 +12,13 @@ const Transactions: React.FC = () => {
         <div className='text-cap mb-[1px]'>
           Transactions
         </div>
-        <a href="#" className='text-4'>
+        <a href="#" className='text-[15px]'>
           2,394.04 M (12.3 TPS)
         </a>
       </div>
       <div className='text-right'>
         <div className='text-cap mb-[1px]'>Med Gas Price</div>
-        <a href="#" className='text-4'>
+        <a href="#" className='text-[15px]'>
           6 Gwei
           <span className='text-[14px] text-[#6c757d]'> ($0.48)</span>
         </a>

@@ -36,13 +36,13 @@ const LastBlock: React.FC = () => {
         <div className='text-cap mb-[1px]'>
           Last Finalized Block
         </div>
-        <a href="/stat/supply" className='text-4'>
+        <a href="#" className='text-[15px]'>
           {finalBlock?.number?.toString()}
         </a>
       </div>
       <div className='text-right'>
         <div className='text-cap mb-[1px]'>Last Safe Block</div>
-        <a href="/gastracker" className='text-4'>
+        <a href="#" className='text-[15px]'>
           {safeBlock?.number?.toString()}
         </a>
       </div>
