@@ -1,31 +1,12 @@
 'use client';
 import React, { useState, useEffect, useContext } from 'react';
-import { Block } from 'viem';
+import { useBlock } from 'wagmi';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGauge } from '@fortawesome/free-solid-svg-icons';
-import { EthereumContext } from '@/app/ethereum-provider';
-import { EthereumContextType } from '@/app/lib/definition';
 
 const LastBlock: React.FC = () => {
-  const { client } = useContext(EthereumContext) as EthereumContextType;
-  const [finalBlock, setFinalBlock] = useState<Block | null>(null);
-  const [safeBlock, setSafeBlock] = useState<Block | null>(null);
-
-  const getFinalBlock = async () => {
-    let block = await client.getBlock({ blockTag: 'finalized' });
-    setFinalBlock(block);
-  }
-
-  const getSafeBlock = async () => {
-    let block = await client.getBlock({ blockTag: 'safe' });
-    setSafeBlock(block);
-  }
-
-  useEffect(() => {
-    getFinalBlock();
-    getSafeBlock();
-  }, []);
-
+  const finalizedBlock = useBlock({ blockTag: "finalized" });
+  const safeBlock = useBlock({ blockTag: "safe" });
 
   return (
     <div className='flex'>
@@ -37,13 +18,13 @@ const LastBlock: React.FC = () => {
           Last Finalized Block
         </div>
         <a href="#" className='text-[15px]'>
-          {finalBlock?.number?.toString()}
+          {finalizedBlock.data?.number?.toString()}
         </a>
       </div>
       <div className='text-right'>
         <div className='text-cap mb-[1px]'>Last Safe Block</div>
         <a href="#" className='text-[15px]'>
-          {safeBlock?.number?.toString()}
+          {safeBlock.data?.number?.toString()}
         </a>
       </div>
     </div>

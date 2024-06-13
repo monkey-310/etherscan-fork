@@ -6,7 +6,6 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 config.autoAddCss = false;
 
 import ThemeProvider from "./theme-provider";
-import EthereumProvider from "./ethereum-provider";
 
 export const metadata: Metadata = {
   title: "Ethereum (ETH) Blockchain Explorer",
@@ -21,11 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen">
-        <EthereumProvider>
-          <ThemeProvider>
-            {children}
-          </ThemeProvider>
-        </EthereumProvider>
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

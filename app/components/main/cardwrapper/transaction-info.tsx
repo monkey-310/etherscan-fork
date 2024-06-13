@@ -1,39 +1,28 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { EthereumContext } from '@/app/ethereum-provider';
-import { EthereumContextType, TransactionData } from '@/app/lib/definition';
+import React, { useEffect, useState } from 'react'
+import { TransactionData } from '@/app/lib/definition';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileLines } from '@fortawesome/free-solid-svg-icons';
-import { Transaction, Block } from 'viem';
+import { useTransaction } from 'wagmi';
 
-const TransactionInfo: React.FC<{ number: number, block: Block }> = ({ number, block }) => {
-  const { client } = useContext(EthereumContext) as EthereumContextType;
+const TransactionInfo: React.FC<{ number: number, blockNum: bigint, timeStamp: bigint }> = ({ number, blockNum, timeStamp }) => {
+  const { data } = useTransaction({ blockNumber: blockNum, index: number });
   const [txn, setTxn] = useState<TransactionData | null>(null);
 
-  const getTransactionInfo: () => {} = async () => {
-    if (block.number) {
-      let tnx: Transaction = await client.getTransaction({
-        blockNumber: block.number,
-        index: number
-      });
+  useEffect(() => {
+    if (data) {
       let temp: number = 0;
-      if (tnx.gasPrice) {
-        temp = Number(tnx.gas * tnx.gasPrice) / 1e18;
+      if (data?.gasPrice) {
+        temp = Number(data.gas * data.gasPrice) / 1e18;
       }
       setTxn({
-        hash: `${tnx.hash.slice(0, 12)}...`,
-        from: `${tnx.from.toString().slice(0, 10)}...${tnx.from.slice(-8)}`,
-        to: `${tnx.to?.toString().slice(0, 10)}...${tnx.to?.slice(-8)}`,
-        time: Number(Math.ceil(Date.now() / 1000) - Number(block.timestamp)),
+        hash: `${data?.hash.slice(0, 12)}...`,
+        from: `${data?.from.toString().slice(0, 10)}...${data?.from.slice(-8)}`,
+        to: `${data?.to?.toString().slice(0, 10)}...${data?.to?.slice(-8)}`,
+        time: Number(Math.floor(Date.now() / 1000) - Number(timeStamp)),
         amount: temp
       });
-    } else {
-      alert("Some issue occurs on getting block info");
     }
-  }
-
-  useEffect(() => {
-    getTransactionInfo();
-  }, []);
+  }, [data]);
 
   return (
     <div className='row'>

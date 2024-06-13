@@ -1,73 +1,85 @@
 'use client';
 
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { ThemeConext } from "@/app/theme-provider";
-import { EthereumContextType, ThemeContextType } from '@/app/lib/definition';
+import { ThemeContextType } from '@/app/lib/definition';
 import { getTwoAfterPointNumber } from '@/app/lib/util';
-import { ethers } from "ethers";
-import { EthereumContext } from '@/app/ethereum-provider';
+import { useReadContracts } from 'wagmi';
+import { chainlinkEthUsdAbi, chainlinkEthBtcAbi } from '@/app/lib/data';
+import { ethers } from 'ethers'
 
-const chainlinkEthBtcAbi = [
-  {
-    "inputs": [],
-    "name": "latestRoundData",
-    "outputs": [
-      { "internalType": "uint80", "name": "roundId", "type": "uint80" },
-      { "internalType": "int256", "name": "answer", "type": "int256" },
-      { "internalType": "uint256", "name": "startedAt", "type": "uint256" },
-      { "internalType": "uint256", "name": "updatedAt", "type": "uint256" },
-      { "internalType": "uint80", "name": "answeredInRound", "type": "uint80" },
-    ],
-    "stateMutability": "view",
-    "type": "function",
-  },
-];
-const chainlinkEthUsdAddress = "0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419";
+const chainlinkEthUsdAddress = "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419";
 const chainlinkEthBtcAddress = "0xAc559F25B1619171CbC396a50854A3240b6A4e99";
 
-const chainlinkEthUsdAbi = [
-  "function latestRoundData() external view returns ( uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound)",
-  "function getRoundData(uint80 _roundId) external view returns ( uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound)"
-];
+// const chainlinkEthUsdAbi = [
+//   "function latestRoundData() external view returns ( uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound)",
+//   "function getRoundData(uint80 _roundId) external view returns ( uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound)"
+// ];
+
+const ethUSDContract = {
+  address: '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419',
+  abi: chainlinkEthUsdAbi,
+} as const
+const ethBTCContract = {
+  address: '0xAc559F25B1619171CbC396a50854A3240b6A4e99',
+  abi: chainlinkEthBtcAbi,
+} as const
 
 const EtherPrice: React.FC = () => {
   const { theme } = useContext(ThemeConext) as ThemeContextType;
-  const { provider } = useContext(EthereumContext) as EthereumContextType;
-  const priceFeedEthUSD = useRef(new ethers.Contract(chainlinkEthUsdAddress, chainlinkEthUsdAbi, provider));
-  const priceFeedEthBTC = useRef(new ethers.Contract(chainlinkEthBtcAddress, chainlinkEthBtcAbi, provider));
+  const { data } = useReadContracts({
+    contracts: [
+      {
+        ...ethUSDContract,
+        functionName: 'latestRoundData'
+      },
+      {
+        ...ethUSDContract,
+        functionName: 'getRoundData'
+      },
+      {
+        ...ethBTCContract,
+        functionName: "latestRoundData"
+      }
+    ]
+  });
+
   const [ethPrice, setEthPrice] = useState<string | null>(null);
   const [btcPrice, setBtcPrice] = useState<string | null>(null);
   const [percent, setPercent] = useState<number | null>(null);
 
-  const getEthUSDPrice: Function = async () => {
-    const latestRoundData = await priceFeedEthUSD.current.latestRoundData();
-    const latestPrice = latestRoundData.answer;
-    setEthPrice(getTwoAfterPointNumber(Number(latestPrice) / 1e8));
-    const currentTime = Math.floor(Date.now() / 1000);
-    const targetTime = currentTime - 24 * 60 * 60;
-    let roundId = latestRoundData.roundId;
-    let roundData;
-    do {
-      roundData = await priceFeedEthUSD.current.getRoundData(roundId);
-      roundId -= BigInt(10);
-    } while (roundData.updatedAt > targetTime && roundId > 0);
-    const price24HoursAgo = roundData.answer;
-    let rate = Number(latestPrice) * 100 / Number(price24HoursAgo) - 100;
-    const percent = Math.round(rate * 100) / 100;
-    setPercent(percent);
-  }
+  // const getEthUSDPrice: Function = async () => {
+  //   const latestRoundData = await priceFeedEthUSD.current.latestRoundData();
+  //   const `latestPrice` = latestRoundData.answer;
+  //   setEthPrice(getTwoAfterPointNumber(Number(latestPrice) / 1e8));
+  //   const currentTime = Math.floor(Date.now() / 1000);
+  //   const targetTime = currentTime - 24 * 60 * 60;
+  //   let roundId = latestRoundData.roundId;
+  //   let roundData;
+  //   do {
+  //     roundData = await priceFeedEthUSD.current.getRoundData(roundId);
+  //     roundId -= BigInt(10);
+  //   } while (roundData.updatedAt > targetTime && roundId > 0);
+  //   const price24HoursAgo = roundData.answer;
+  //   let rate = Number(latestPrice) * 100 / Number(price24HoursAgo) - 100;
+  //   const percent = Math.round(rate * 100) / 100;
+  //   setPercent(percent);
+  // }
 
-  const getEthBTCPrice: Function = async () => {
-    const latestRoundData = await priceFeedEthBTC.current.latestRoundData();
-    const price = ethers.formatUnits(latestRoundData.answer, 8);
-    setBtcPrice(price);
-  }
+  // const getEthBTCPrice: Function = async () => {
+  //   const latestRoundData = await priceFeedEthBTC.current.latestRoundData();
+
+  //   setBtcPrice(price);
+  // }
 
   useEffect(() => {
-    getEthUSDPrice();
-    getEthBTCPrice();
-  }, []);
+    // getEthUSDPrice();
+    // getEthBTCPrice();
+    if (data) {
+      // setEthPrice(getTwoAfterPointNumber(Number(usdPrice) / 1e8))
+    }
+  }, [data]);
 
   return (
     <div className='flex'>

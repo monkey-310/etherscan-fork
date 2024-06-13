@@ -1,22 +1,14 @@
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { PublicClient, Address } from 'viem';
-import { Provider } from 'ethers'
 
 export type ThemeContextType = {
   theme: string | null,
   setTheme: (theme: string) => void
 }
 
-export type EthereumContextType = {
-  client: PublicClient,
-  provider: Provider
-}
-
 export type BlockData = {
   number: bigint | null,
   time: number,
-  txns: number,
-  recepient: string | Address,
+  txns: number
 }
 
 export type TransactionData = {

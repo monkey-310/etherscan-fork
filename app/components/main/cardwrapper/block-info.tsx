@@ -1,27 +1,21 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { EthereumContext } from '@/app/ethereum-provider';
-import { BlockData, EthereumContextType } from '@/app/lib/definition';
-import { Block } from 'viem';
+import React, { useEffect, useState } from 'react';
+import { BlockData } from '@/app/lib/definition';
+import { useBlock } from 'wagmi';
+import ENSName from './ens-name';
 
 function BlockInfo({ number }: { number: bigint }) {
-  const { client } = useContext(EthereumContext) as EthereumContextType;
+  const { data } = useBlock({ blockNumber: number });
   const [block, setBlock] = useState<BlockData | null>(null);
 
-  const getBlockInfo: () => {} = async () => {
-    let tempBlock: Block = await client.getBlock({ blockNumber: number });
-    let ensName: string | null = await client.getEnsName({ address: tempBlock.miner });
-    let temp: string = tempBlock.miner.toString();
-    setBlock({
-      number,
-      time: Number(Math.floor(Date.now() / 1000) - Number(tempBlock.timestamp)),
-      txns: tempBlock.transactions.length,
-      recepient: ensName ? ensName.split(".")[0] : `${temp.toString().slice(0, 10)}...${temp.slice(-8)}`
-    });
-  }
-
   useEffect(() => {
-    getBlockInfo();
-  }, []);
+    if (data) {
+      setBlock({
+        number,
+        time: Number(Math.floor(Date.now() / 1000) - Number(data.timestamp)),
+        txns: data.transactions.length,
+      });
+    }
+  }, [data]);
 
   return (
     <div className='row'>
@@ -43,9 +37,7 @@ function BlockInfo({ number }: { number: bigint }) {
         <div className='pr-0 sm:pr-2'>
           <div className='flex flex-wrap gap-1 text-sm'>
             Fee Recipient
-            <a href="#" className='text-[#0783c4]'>
-              <span>{block?.recepient}</span>
-            </a>
+            {data?.miner && <ENSName miner={data?.miner} />}
           </div>
           <a href="#" className='text-[#0783c4] text-sm'>{block?.txns} txns</a>
           <span className='text-xs text-muted mx-2'>in 12 secs</span>
