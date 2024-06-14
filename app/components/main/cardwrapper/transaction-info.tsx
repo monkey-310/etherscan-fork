@@ -47,15 +47,27 @@ const TransactionInfo: React.FC<{ number: number, blockNum: bigint, timeStamp: b
         <div className='pr-0 sm:pr-2'>
           <div className='flex flex-wrap gap-1 text-sm'>
             From
-            <a href="#" className='text-[#0783c4]'>
-              <span>{txn?.from}</span>
-            </a>
+            <div className="group relative">
+              <a href="#" className='text-[#0783c4]'>
+                <span>{txn?.from}</span>
+              </a>
+              <span className="custom-tooltip" >
+                {data?.from.toString()}
+                <div className='custom-tooltip-arrow'></div>
+              </span>
+            </div>
           </div>
           <div className='flex flex-wrap gap-1 text-sm'>
             To
-            <a href="#" className='text-[#0783c4]'>
-              <span>{txn?.to}</span>
-            </a>
+            <div className="group relative">
+              <a href="#" className='text-[#0783c4]'>
+                <span>{txn?.to}</span>
+              </a>
+              <span className="custom-tooltip" >
+                {data?.to && data?.to.toString()}
+                <div className='custom-tooltip-arrow'></div>
+              </span>
+            </div>
           </div>
         </div>
         <div className='hidden sm:block sm:ml-0 text-end ml-2'>

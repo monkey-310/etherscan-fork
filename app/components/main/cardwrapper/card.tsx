@@ -28,7 +28,7 @@ const Card: React.FC<{ title: string }> = ({ title }) => {
             Customize
           </button>
         </div>
-        <div className='card-body overflow-auto scrollbar-custom max-h-[30.3rem]'>
+        <div className='card-body scrollbar-custom max-h-[30.3rem]'>
           <div>
             {(title === "block" && data?.number) && [...Array(6)].map((_, i) => (
               <React.Fragment key={i}>

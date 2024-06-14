@@ -117,10 +117,17 @@ export const navMoreData: NavMenuType[] = [
 export const chainlinkEthUsdAbi = [
   {
     type: 'function',
-    name: 'latestRoundData',
+    name: 'latestAnswer',
     stateMutability: 'view',
     inputs: [],
     outputs: [{ name: "answer", type: 'int256' }],
+  },
+  {
+    type: 'function',
+    name: 'latestRound',
+    stateMutability: 'view',
+    inputs: [],
+    outputs: [{ name: "roundId", type: 'uint256' }],
   },
   {
     type: 'function',

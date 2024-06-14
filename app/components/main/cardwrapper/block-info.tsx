@@ -37,7 +37,10 @@ function BlockInfo({ number }: { number: bigint }) {
         <div className='pr-0 sm:pr-2'>
           <div className='flex flex-wrap gap-1 text-sm'>
             Fee Recipient
-            {data?.miner && <ENSName miner={data?.miner} />}
+            <div className="group relative">
+              <span>{data?.miner && <ENSName miner={data?.miner} />}</span>
+            </div>
+
           </div>
           <a href="#" className='text-[#0783c4] text-sm'>{block?.txns} txns</a>
           <span className='text-xs text-muted mx-2'>in 12 secs</span>

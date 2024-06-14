@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const CustomizeModal: React.FC<{ isShowModal: boolean, setIsShowModal: (isShowModal: boolean) => void }> = ({ isShowModal, setIsShowModal }) => {
-
   const handleCloseClick = (e: any) => {
     e.preventDefault();
     setIsShowModal(false);
@@ -24,9 +23,9 @@ const CustomizeModal: React.FC<{ isShowModal: boolean, setIsShowModal: (isShowMo
   }, [isShowModal]);
 
   return (
-    <div className={clsx('z-[1400] modal-overlay ', isShowModal ? "block" : "hidden")}>
-      <div className="modal-wrapper mx-auto my-8 ">
-        <div className="modal bg-[var(--bs-bg-color)] text-[var(--bs-text-color)]">
+    <div className={clsx('z-[1400] modal-overlay', isShowModal ? "block" : "hidden")} >
+      <div className="modal-wrapper">
+        <div id="modal" className={`modal bg-[var(--bs-bg-color)] text-[var(--bs-text-color)] ${isShowModal ? "modal-open" : "modal-close"}`}>
           <div className="modal-header border-b border-b-[var(--bs-border-color)]">
             <div className='w-full flex justify-between m-4'>
               <h4>Custom Card</h4>
@@ -70,11 +69,13 @@ const CustomizeModal: React.FC<{ isShowModal: boolean, setIsShowModal: (isShowMo
             </div>
           </div>
           <div id="modal-footer" className='flex w-full justify-end border-t border-t-[var(--bs-border-color)] p-3 gap-2'>
-            <button className='hover:bg-[var(--bs-border-color)] p-2 rounded-lg' onClick={() => setIsShowModal(false)}>Close</button>
-            <button className='bg-[#0784c3] text-white p-2 rounded-lg' onClick={() => setIsShowModal(false)}>
+            <button className='hover:bg-[var(--bs-border-color)] p-2 rounded-lg' onClick={handleCloseClick}>Close</button>
+            <button className='bg-[#0784c3] text-white p-2 rounded-lg' onClick={handleCloseClick}>
               Save Changes
             </button>
           </div>
+        </div>
+        <div className='ground-panel' onClick={handleCloseClick}>
         </div>
       </div>
     </div>
