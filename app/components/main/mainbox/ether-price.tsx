@@ -1,27 +1,21 @@
 'use client';
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import { ThemeConext } from "@/app/theme-provider";
 import { ThemeContextType } from '@/app/lib/definition';
 import { formatDate, getTwoAfterPointNumber } from '@/app/lib/util';
-import { useReadContracts, useGasPrice } from 'wagmi';
-import { readContract } from '@wagmi/core';
-import { chainlinkEthUsdAbi, chainlinkEthBtcAbi } from '@/app/lib/data';
-import { wagmiConfig } from '@/app/config';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
+const etherscanAPI = "https://api.etherscan.io/api?module=stats&action=ethprice&apikey=RXU1Q7C8WRCYPR1GMKNPXHC4TXQWP29P1G";
 
 const EtherPrice: React.FC = () => {
   const { theme } = useContext(ThemeConext) as ThemeContextType;
-  const [ethPrice, setEthPrice] = useState<string | null>(null);
-  const [btcPrice, setBtcPrice] = useState<string | null>(null);
-  const [percent, setPercent] = useState<number | null>(null);
   const { data } = useQuery({
     queryKey: ['priceFeed'], queryFn: () =>
       axios
-        .get('https://api.etherscan.io/api?module=stats&action=ethprice&apikey=RXU1Q7C8WRCYPR1GMKNPXHC4TXQWP29P1G')
+        .get(etherscanAPI)
         .then((res) => res.data)
   });
   const { data: historyPrice } = useQuery({
@@ -31,19 +25,19 @@ const EtherPrice: React.FC = () => {
         .then((res) => res.data)
   });
 
-  useEffect(() => {
-    if (data) {
-      let temp = Number(data?.result?.ethusd);
-      setEthPrice(getTwoAfterPointNumber(temp));
-      setBtcPrice(data?.result?.ethbtc.slice(0, 8));
+
+  const price = useMemo(() => {
+    let temp = Number(data.result?.ethusd);
+    return {
+      ethPrice: getTwoAfterPointNumber(temp),
+      btcPrice: data.result?.ethbtc.slice(0, 8)
     }
   }, [data]);
 
-  useEffect(() => {
+  const percent = useMemo(() => {
     if (historyPrice) {
       let rate = Number(Number(data?.result?.ethusd)) * 100 / Number(historyPrice?.market_data?.current_price?.usd) - 100;
-      const percent = Math.round(rate * 100) / 100;
-      setPercent(percent);
+      return Math.round(rate * 100) / 100;
     }
   }, [historyPrice]);
 
@@ -59,8 +53,8 @@ const EtherPrice: React.FC = () => {
       <div className='flex-grow'>
         <div className='text-cap mb-[1px]'>Ether Price</div>
         <a href="#" className='text-[15px]'>
-          ${ethPrice}
-          <span className='text-[#6c757d]'> @ {btcPrice} BTC</span>
+          ${price.ethPrice}
+          <span className='text-[#6c757d]'> @ {price.btcPrice} BTC</span>
           {percent ?
             (<span className={`text-xs ${percent > 0 ? "text-[#00a186]" : "text-[#dc3545]"}`}>
               ({percent < 0 ? `${percent}%` : `+${percent}%`})
