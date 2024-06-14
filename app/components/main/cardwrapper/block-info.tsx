@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useMemo } from 'react';
 import { BlockData } from '@/app/lib/definition';
 import { useBlock } from 'wagmi';
 import ENSName from './ens-name';
 
 function BlockInfo({ number }: { number: bigint }) {
   const { data } = useBlock({ blockNumber: number });
-  const [block, setBlock] = useState<BlockData | null>(null);
 
-  useEffect(() => {
-    if (data) {
-      setBlock({
+  const block = useMemo(() => {
+    if(data) {
+      return {
         number,
         time: Number(Math.floor(Date.now() / 1000) - Number(data.timestamp)),
-        txns: data.transactions.length,
-      });
+        txns: data.transactions.length
+      } as BlockData;
     }
   }, [data]);
-
+  
   return (
     <div className='row'>
       <div className='sm:w-1/3'>

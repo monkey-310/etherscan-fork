@@ -1,26 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import React, { useMemo } from 'react'
 import { TransactionData } from '@/app/lib/definition';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileLines } from '@fortawesome/free-solid-svg-icons';
 import { useTransaction } from 'wagmi';
 
-const TransactionInfo: React.FC<{ number: number, blockNum: bigint, timeStamp: bigint }> = ({ number, blockNum, timeStamp }) => {
-  const { data } = useTransaction({ blockNumber: blockNum, index: number });
-  const [txn, setTxn] = useState<TransactionData | null>(null);
+type Props = {
+  number: number; 
+  blockNum: bigint;
+  timeStamp: bigint;
+};
 
-  useEffect(() => {
+const TransactionInfo: React.FC<Props> = ({ number, blockNum, timeStamp }) => {
+  const { data } = useTransaction({ blockNumber: blockNum, index: number });
+  
+  const txn = useMemo(() => {
     if (data) {
       let temp: number = 0;
-      if (data?.gasPrice) {
+      if (data.gasPrice) {
         temp = Number(data.gas * data.gasPrice) / 1e18;
       }
-      setTxn({
-        hash: `${data?.hash.slice(0, 12)}...`,
-        from: `${data?.from.toString().slice(0, 10)}...${data?.from.slice(-8)}`,
-        to: `${data?.to?.toString().slice(0, 10)}...${data?.to?.slice(-8)}`,
+      return {
+        hash: `${data.hash.slice(0, 12)}...`,
+        from: `${data.from.toString().slice(0, 10)}...${data?.from.slice(-8)}`,
+        to: `${data.to?.toString().slice(0, 10)}...${data?.to?.slice(-8)}`,
         time: Number(Math.floor(Date.now() / 1000) - Number(timeStamp)),
         amount: temp
-      });
+      } as TransactionData;
     }
   }, [data]);
 
