@@ -27,10 +27,12 @@ const EtherPrice: React.FC = () => {
 
 
   const price = useMemo(() => {
-    let temp = Number(data.result?.ethusd);
-    return {
-      ethPrice: getTwoAfterPointNumber(temp),
-      btcPrice: data.result?.ethbtc.slice(0, 8)
+    if(data) {
+      let temp = Number(data.result?.ethusd);
+      return {
+        ethPrice: getTwoAfterPointNumber(temp),
+        btcPrice: data.result?.ethbtc.slice(0, 8)
+      }
     }
   }, [data]);
 
@@ -53,8 +55,8 @@ const EtherPrice: React.FC = () => {
       <div className='flex-grow'>
         <div className='text-cap mb-[1px]'>Ether Price</div>
         <a href="#" className='text-[15px]'>
-          ${price.ethPrice}
-          <span className='text-[#6c757d]'> @ {price.btcPrice} BTC</span>
+          ${price?.ethPrice}
+          <span className='text-[#6c757d]'> @ {price?.btcPrice} BTC</span>
           {percent ?
             (<span className={`text-xs ${percent > 0 ? "text-[#00a186]" : "text-[#dc3545]"}`}>
               ({percent < 0 ? `${percent}%` : `+${percent}%`})
