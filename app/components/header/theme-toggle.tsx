@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useContext } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ThemeConext } from "@/app/theme-provider";
-import { ThemeContextType } from '@/app/lib/definition';
-import { themeOptions } from '@/app/lib/data';
+import { ThemeContextType } from "@/app/lib/definition";
+import { themeOptions } from "@/app/lib/data";
 
 const ThemeToggle = () => {
   const { theme, setTheme } = useContext(ThemeConext) as ThemeContextType;
 
   return (
-    <div className='my-2'>
+    <div className="my-2">
       <span className="text-sm text-[#066a9c]">
         <a
           href="#"
@@ -37,7 +37,10 @@ const ThemeToggle = () => {
                 className="block px-4 py-2 text-xs hover:rounded-md hover:bg-[var(--bs-toggle-button-hover)] active:text-[#0784c3] focus:text-[#0784c3]"
                 onClick={() => setTheme(key)}
               >
-                <FontAwesomeIcon icon={themeOptions[key].icon} className='mr-2' />
+                <FontAwesomeIcon
+                  icon={themeOptions[key].icon}
+                  className="mr-2"
+                />
                 {themeOptions[key].label}
               </a>
             </li>
@@ -55,7 +58,7 @@ const ThemeToggle = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default ThemeToggle;

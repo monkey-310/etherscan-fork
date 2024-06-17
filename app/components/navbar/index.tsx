@@ -1,16 +1,14 @@
-'use client';
+"use client";
 
-import React, { useState, useContext } from 'react'
-import Image from 'next/image';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import { ThemeConext } from '@/app/theme-provider';
-import { ThemeContextType } from '@/app/lib/definition';
-import { navbarData, navMoreData } from '@/app/lib/data';
-
+import React, { useState, useContext } from "react";
+import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import { ThemeConext } from "@/app/theme-provider";
+import { ThemeContextType } from "@/app/lib/definition";
+import { navbarData, navMoreData } from "@/app/lib/data";
 
 const Navbar: React.FC = () => {
-
   const { theme } = useContext(ThemeConext) as ThemeContextType;
   const [navbar, setNavbar] = useState<boolean>(false);
 
@@ -21,15 +19,25 @@ const Navbar: React.FC = () => {
           <div>
             <div className="flex items-center justify-between py-2 md:py-2 md:block">
               <a href="/">
-                {theme === 'light' ?
-                  <Image src="imgs/logo-etherscan.svg" width="150" height="30" alt="Etherscan Logo" />
-                  :
-                  <Image src="imgs/etherscan-light.svg" width="150" height="30" alt="Etherscan Logo" />
-                }
+                {theme === "light" ? (
+                  <Image
+                    src="imgs/logo-etherscan.svg"
+                    width="150"
+                    height="30"
+                    alt="Etherscan Logo"
+                  />
+                ) : (
+                  <Image
+                    src="imgs/etherscan-light.svg"
+                    width="150"
+                    height="30"
+                    alt="Etherscan Logo"
+                  />
+                )}
               </a>
               <div className="flex items-center gap-2 text-[var(--bs-text-color)] text-sm md:hidden">
                 <a href="#">
-                  <FontAwesomeIcon icon={faUserCircle} className='mr-1' />
+                  <FontAwesomeIcon icon={faUserCircle} className="mr-1" />
                   Sign In
                 </a>
                 <button
@@ -71,8 +79,9 @@ const Navbar: React.FC = () => {
           </div>
           <div>
             <div
-              className={`flex-1 justify-self-center pb-3 md:block md:pb-0 md:mt-0 ${navbar ? 'block' : 'hidden'
-                }`}
+              className={`flex-1 justify-self-center pb-3 md:block md:pb-0 md:mt-0 ${
+                navbar ? "block" : "hidden"
+              }`}
             >
               <ul className="items-center justify-center md:flex md:space-x-6 md:space-y-0">
                 <li className="nav-item">
@@ -94,36 +103,43 @@ const Navbar: React.FC = () => {
                       <i className="fa fa-angle-down ml-1.5"></i>
                     </a>
                     <div className="hidden dropdown px-3 group-hover:flex group-hover:scale-100 transition-transform rounded-b-lg hover:flex md:min-w-[230px] flex-col mt-3 md:mt-0 border-[var(--bs-border-color)] bg-[var(--bs-bg-color)] md:drop-shadow-lg static md:absolute py-3 top-12 md:border-t-[3px] md:border-t-[#0784c3] md:rounded-b-lg z-10">
-                      {data.data.map((sub, i) => (
-                        sub.label ?
+                      {data.data.map((sub, i) =>
+                        sub.label ? (
                           <a
                             href="#"
                             className="text-xs px-3 py-2 text-[var(--bs-text-color)] hover:rounded-md hover:bg-[var(--bs-toggle-button-hover)]"
                             key={i}
                           >
                             {sub.label}
-                            {sub.subLabel && <span className="text-[11px] text-[var(--bs-text-color)] text-gray-400"> {`(${sub.subLabel})`} </span>}
+                            {sub.subLabel && (
+                              <span className="text-[11px] text-[var(--bs-text-color)] text-gray-400">
+                                {" "}
+                                {`(${sub.subLabel})`}{" "}
+                              </span>
+                            )}
                             {sub.badge && (
                               <span className="text-[var(--bs-text-color)] text-[9px] ml-2 px-2 py-0.5 rounded-md bg-[var(--bs-bg-icon-card)] border border-solid border-[var(--bs-border-color)] font-bold">
                                 Beta
                               </span>
                             )}
-                          </a> :
-                          <hr key={i} className="my-2 border-[var(--bs-border-color)]"></hr>
-                      ))}
+                          </a>
+                        ) : (
+                          <hr
+                            key={i}
+                            className="my-2 border-[var(--bs-border-color)]"
+                          ></hr>
+                        )
+                      )}
                     </div>
                   </li>
                 ))}
                 <li className="group nav-item">
-                  <a
-                    href="#"
-                    className="nav-link text-[var(--bs-text-color)]"
-                  >
+                  <a href="#" className="nav-link text-[var(--bs-text-color)]">
                     More <i className="fa fa-angle-down ml-1.5"></i>
                   </a>
                   <div className="hidden dropdown p-2 group-hover:flex rounded-b-lg w-full left-0 hover:flex w-mt-3 md:mt-0  md:min-w-[230px] flexborder border-[var(--bs-border-color)] bg-[var(--bs-bg-color)] md:drop-shadow-lg static md:absolute top-12 md:border-t-[3px] md:border-t-[#0784c3] md:rounded-b-lg z-10">
                     <div className="grid grid-cols-1 sm:grid-cols-4">
-                      <div className='rounded-lg bg-[var(--bs-bg-footer)]'>
+                      <div className="rounded-lg bg-[var(--bs-bg-footer)]">
                         <div className="hidden sm:block h-100 p-5 ">
                           <div>
                             <h6 className="text-sm font-medium text-[var(--bs-text-color)] mb-3 ">
@@ -139,10 +155,16 @@ const Navbar: React.FC = () => {
                               Sponsored
                             </p>
                             <a href="#">
-                              {theme === 'light' ? (
-                                <img src="imgs/etherscan-dark-logo.svg" width="100" />
+                              {theme === "light" ? (
+                                <img
+                                  src="imgs/etherscan-dark-logo.svg"
+                                  width="100"
+                                />
                               ) : (
-                                <img src="imgs/etherscan-light-logo.svg" width="100" />
+                                <img
+                                  src="imgs/etherscan-light-logo.svg"
+                                  width="100"
+                                />
                               )}
                             </a>
                           </div>
@@ -162,11 +184,18 @@ const Navbar: React.FC = () => {
                                 href="#"
                                 className="text-xs px-3 py-2 text-[var(--bs-text-color)] hover:rounded-md hover:bg-[var(--bs-toggle-button-hover)] block"
                               >
-                                {sub.icon && <FontAwesomeIcon icon={sub.icon} className='mr-2' />}
+                                {sub.icon && (
+                                  <FontAwesomeIcon
+                                    icon={sub.icon}
+                                    className="mr-2"
+                                  />
+                                )}
                                 {sub.label}
-                                {sub.badge && <span className="text-[var(--bs-text-color)] text-[9px] ml-2 px-2 py-0.5 rounded-md bg-[var(--bs-bg-icon-card)] border border-solid border-[var(--bs-border-color)] font-bold">
-                                  {sub.badge}
-                                </span>}
+                                {sub.badge && (
+                                  <span className="text-[var(--bs-text-color)] text-[9px] ml-2 px-2 py-0.5 rounded-md bg-[var(--bs-bg-icon-card)] border border-solid border-[var(--bs-border-color)] font-bold">
+                                    {sub.badge}
+                                  </span>
+                                )}
                               </a>
                             ))}
                           </div>
@@ -188,10 +217,16 @@ const Navbar: React.FC = () => {
                               Sponsored
                             </p>
                             <a href="#">
-                              {theme === 'light' ? (
-                                <img src="imgs/etherscan-dark-logo.svg" width="100" />
+                              {theme === "light" ? (
+                                <img
+                                  src="imgs/etherscan-dark-logo.svg"
+                                  width="100"
+                                />
                               ) : (
-                                <img src="imgs/etherscan-light-logo.svg" width="100" />
+                                <img
+                                  src="imgs/etherscan-light-logo.svg"
+                                  width="100"
+                                />
                               )}
                             </a>
                           </div>
@@ -205,7 +240,7 @@ const Navbar: React.FC = () => {
                     href="/"
                     className="nav-link md:hidden text-[var(--bs-text-color)]"
                   >
-                    Appearance & Settings{' '}
+                    Appearance & Settings{" "}
                     <i className="fa fa-angle-down ml-auto"></i>
                   </a>
                   <div className="hidden dropdown px-3 group-hover:flex group-hover:scale-100 transition-transform rounded-b-lg hover:flex md:min-w-[230px] flex-col mt-3 md:mt-0 border-[var(--bs-border-color)] bg-[var(--bs-bg-color)] md:drop-shadow-lg static md:absolute py-3 top-12 md:border-t-[3px] -t md:rounded-b-lg z-10 dark:bg-gray-700 dark:divide-gray-600">
@@ -234,12 +269,15 @@ const Navbar: React.FC = () => {
                     </a>
                   </div>
                 </li>
-                <li className="hidden text-gray-300 self-center min-[992px]:block" style={{ marginLeft: '0px' }}>
+                <li
+                  className="hidden text-gray-300 self-center min-[992px]:block"
+                  style={{ marginLeft: "0px" }}
+                >
                   <span>|</span>
                 </li>
                 <li className="nav-item hidden md:block text-[var(--bs-text-color)]">
-                  <a href="#" className='nav-link'>
-                    <FontAwesomeIcon icon={faUserCircle} className='mr-2' />
+                  <a href="#" className="nav-link">
+                    <FontAwesomeIcon icon={faUserCircle} className="mr-2" />
                     Sign In
                   </a>
                 </li>
@@ -249,7 +287,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
 
 export default Navbar;

@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
-import Image from 'next/image';
+import React, { useContext } from "react";
+import Image from "next/image";
 import { ThemeConext } from "@/app/theme-provider";
-import { ThemeContextType } from '@/app/lib/definition';
+import { ThemeContextType } from "@/app/lib/definition";
 
 const MainnetToggle = () => {
   const { theme } = useContext(ThemeConext) as ThemeContextType;
 
   return (
-    <div className='my-2'>
+    <div className="my-2">
       <span className="text-sm">
         <a
           href="#"
@@ -18,10 +18,23 @@ const MainnetToggle = () => {
           data-dropdown-offset-skidding="125"
           className="py-[10px] px-[12px] border border-solid border-[var(--bs-border-color)] hover:bg-[var(--bs-toggle-button-hover)] rounded-md"
         >
-          {theme === 'light'
-            ? <Image src="imgs/ethereum-dark.svg" className="inline" width={10} height={10} alt="Ethererum Logo" />
-            : <Image src="imgs/ethereum-light.svg" className="inline" width={10} height={10} alt="Ethererum Logo" />
-          }
+          {theme === "light" ? (
+            <Image
+              src="imgs/ethereum-dark.svg"
+              className="inline"
+              width={10}
+              height={10}
+              alt="Ethererum Logo"
+            />
+          ) : (
+            <Image
+              src="imgs/ethereum-light.svg"
+              className="inline"
+              width={10}
+              height={10}
+              alt="Ethererum Logo"
+            />
+          )}
         </a>
       </span>
       <div
@@ -33,7 +46,10 @@ const MainnetToggle = () => {
           aria-labelledby="etherMainnet"
         >
           <li>
-            <a href="#" className="block px-4 py-2 text-xs hover:rounded-md hover:bg-[var(--bs-toggle-button-hover)] active:text-[#0784c3] focus:text-[#0784c3]">
+            <a
+              href="#"
+              className="block px-4 py-2 text-xs hover:rounded-md hover:bg-[var(--bs-toggle-button-hover)] active:text-[#0784c3] focus:text-[#0784c3]"
+            >
               Ethereum Mainnet
             </a>
           </li>
@@ -76,7 +92,7 @@ const MainnetToggle = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default MainnetToggle;

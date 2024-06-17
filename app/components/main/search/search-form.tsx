@@ -1,13 +1,12 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 
 const SearchForm: React.FC = () => {
   return (
     <form action="/search" className="mb-3" method="get">
       <div className="flex gap-2 p-1.5 m-0 border rounded-lg bg-[var(--bs-bg-color)] border-[var(--bs-border-color)]">
-        <select className="hidden sm:block form-select text-sm border-transparent focus:border-transparent focus:ring-0 focus:rounded-lg  bg-[var(--bs-bg-color)] text-[var(--bs-text-color)] mr-2"
-        >
+        <select className="hidden sm:block form-select text-sm border-transparent focus:border-transparent focus:ring-0 focus:rounded-lg  bg-[var(--bs-bg-color)] text-[var(--bs-text-color)] mr-2">
           <option value="0">All Filters</option>
           <option value="1">Addresses</option>
           <option value="2">Tokens</option>
@@ -15,7 +14,7 @@ const SearchForm: React.FC = () => {
           <option value="4">Labels</option>
           <option value="5">Websites</option>
         </select>
-        <div className='grow'>
+        <div className="grow">
           <input
             type="text"
             placeholder="Search by Address / Txn Hash / Block / Token / Domain Name"
