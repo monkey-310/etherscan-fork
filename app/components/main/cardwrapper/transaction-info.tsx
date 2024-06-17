@@ -1,8 +1,8 @@
-import React, { useMemo } from "react";
-import { TransactionData } from "@/app/lib/definition";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileLines } from "@fortawesome/free-solid-svg-icons";
-import { useTransaction } from "wagmi";
+import React, { useMemo } from 'react';
+import { TransactionData } from '@/app/lib/definition';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFileLines } from '@fortawesome/free-solid-svg-icons';
+import { useTransaction } from 'wagmi';
 
 type Props = {
   number: number;
@@ -30,57 +30,57 @@ const TransactionInfo: React.FC<Props> = ({ number, blockNum, timeStamp }) => {
   }, [data]);
 
   return (
-    <div className="row">
-      <div className="sm:w-1/3">
-        <div className="flex items-center gap-2">
-          <div className="w-12 h-12 items-center justify-center rounded-lg sm:flex hidden text-muted p-3 bg-[var(--bs-bg-icon-card)]">
+    <div className='row'>
+      <div className='sm:w-1/3'>
+        <div className='flex items-center gap-2'>
+          <div className='w-12 h-12 items-center justify-center rounded-lg sm:flex hidden text-muted p-3 bg-[var(--bs-bg-icon-card)]'>
             <FontAwesomeIcon icon={faFileLines} />
           </div>
-          <div className="flex flex-row sm:flex-col sm:items-start sm:gap-0 items-center gap-1">
-            <span className="inline-block sm:hidden">Block</span>
-            <a href="#" className="max-w-24 truncate text-[#0783c4] text-sm">
-              {txn?.hash ? txn.hash : ""}
+          <div className='flex flex-row sm:flex-col sm:items-start sm:gap-0 items-center gap-1'>
+            <span className='inline-block sm:hidden'>Block</span>
+            <a href='#' className='max-w-24 truncate text-[#0783c4] text-sm'>
+              {txn?.hash ? txn.hash : ''}
             </a>
-            <div className="text-xs text-muted">
+            <div className='text-xs text-muted'>
               {txn?.time.toString()}
               secs ago
             </div>
           </div>
         </div>
       </div>
-      <div className="items-end flex relative sm:w-2/3 sm:items-center sm:justify-between">
-        <div className="pr-0 sm:pr-2">
-          <div className="flex flex-wrap gap-1 text-sm">
+      <div className='items-end flex relative sm:w-2/3 sm:items-center sm:justify-between'>
+        <div className='pr-0 sm:pr-2'>
+          <div className='flex flex-wrap gap-1 text-sm'>
             From
-            <div className="group relative">
-              <a href="#" className="text-[#0783c4]">
+            <div className='group relative'>
+              <a href='#' className='text-[#0783c4]'>
                 <span>{txn?.from}</span>
               </a>
-              <span className="custom-tooltip">
+              <span className='custom-tooltip'>
                 {data?.from.toString()}
-                <div className="custom-tooltip-arrow"></div>
+                <div className='custom-tooltip-arrow'></div>
               </span>
             </div>
           </div>
-          <div className="flex flex-wrap gap-1 text-sm">
+          <div className='flex flex-wrap gap-1 text-sm'>
             To
-            <div className="group relative">
-              <a href="#" className="text-[#0783c4]">
+            <div className='group relative'>
+              <a href='#' className='text-[#0783c4]'>
                 <span>{txn?.to}</span>
               </a>
-              <span className="custom-tooltip">
+              <span className='custom-tooltip'>
                 {data?.to && data?.to.toString()}
-                <div className="custom-tooltip-arrow"></div>
+                <div className='custom-tooltip-arrow'></div>
               </span>
             </div>
           </div>
         </div>
-        <div className="hidden sm:block sm:ml-0 text-end ml-2">
-          <span className="border border-solid border-[var(--bs-border-color)] px-[8px] py-[5px] text-[11px] rounded-md font-medium">
+        <div className='hidden sm:block sm:ml-0 text-end ml-2'>
+          <span className='border border-solid border-[var(--bs-border-color)] px-[8px] py-[5px] text-[11px] rounded-md font-medium'>
             0
             {txn?.amount !== undefined && txn?.amount > 0
-              ? `.${txn?.amount.toString().split(".")[1].slice(0, 5)}`
-              : ""}
+              ? `.${txn?.amount.toString().split('.')[1].slice(0, 5)}`
+              : ''}
             Eth
           </span>
         </div>

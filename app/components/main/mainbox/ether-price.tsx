@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import React, { useContext, useEffect, useMemo, useState } from "react";
-import Image from "next/image";
-import { ThemeConext } from "@/app/theme-provider";
-import { ThemeContextType } from "@/app/lib/definition";
-import { formatDate, getTwoAfterPointNumber } from "@/app/lib/util";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import React, { useContext, useEffect, useMemo, useState } from 'react';
+import Image from 'next/image';
+import { ThemeConext } from '@/app/theme-provider';
+import { ThemeContextType } from '@/app/lib/definition';
+import { formatDate, getTwoAfterPointNumber } from '@/app/lib/util';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 const etherscanAPI =
-  "https://api.etherscan.io/api?module=stats&action=ethprice&apikey=RXU1Q7C8WRCYPR1GMKNPXHC4TXQWP29P1G";
+  'https://api.etherscan.io/api?module=stats&action=ethprice&apikey=RXU1Q7C8WRCYPR1GMKNPXHC4TXQWP29P1G';
 
 const EtherPrice: React.FC = () => {
   const { theme } = useContext(ThemeConext) as ThemeContextType;
   const { data } = useQuery({
-    queryKey: ["priceFeed"],
+    queryKey: ['priceFeed'],
     queryFn: () => axios.get(etherscanAPI).then((res) => res.data),
   });
   const { data: historyPrice } = useQuery({
-    queryKey: ["historyPrice"],
+    queryKey: ['historyPrice'],
     queryFn: () =>
       axios
         .get(
@@ -50,41 +50,41 @@ const EtherPrice: React.FC = () => {
   }, [historyPrice]);
 
   return (
-    <div className="flex">
-      <div className="text-center mr-3 w-6">
-        {theme === "light" ? (
+    <div className='flex'>
+      <div className='text-center mr-3 w-6'>
+        {theme === 'light' ? (
           <Image
-            src="/imgs/ethereum-dark.svg"
-            className="mx-auto max-w-full"
+            src='/imgs/ethereum-dark.svg'
+            className='mx-auto max-w-full'
             width={18}
             height={18}
-            alt="Ethereum Logo"
+            alt='Ethereum Logo'
           />
         ) : (
           <Image
-            src="/imgs/ethereum-light.svg"
-            className="mx-auto max-w-full"
+            src='/imgs/ethereum-light.svg'
+            className='mx-auto max-w-full'
             width={18}
             height={18}
-            alt="Ethereum Logo"
+            alt='Ethereum Logo'
           />
         )}
       </div>
-      <div className="flex-grow">
-        <div className="text-cap mb-[1px]">Ether Price</div>
-        <a href="#" className="text-[15px]">
+      <div className='flex-grow'>
+        <div className='text-cap mb-[1px]'>Ether Price</div>
+        <a href='#' className='text-[15px]'>
           ${price?.ethPrice}
-          <span className="text-[#6c757d]"> @ {price?.btcPrice} BTC</span>
+          <span className='text-[#6c757d]'> @ {price?.btcPrice} BTC</span>
           {percent ? (
             <span
               className={`text-xs ${
-                percent > 0 ? "text-[#00a186]" : "text-[#dc3545]"
+                percent > 0 ? 'text-[#00a186]' : 'text-[#dc3545]'
               }`}
             >
               ({percent < 0 ? `${percent}%` : `+${percent}%`})
             </span>
           ) : (
-            ""
+            ''
           )}
         </a>
       </div>

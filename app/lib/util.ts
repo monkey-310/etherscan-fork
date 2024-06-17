@@ -1,7 +1,9 @@
-export const getTwoAfterPointNumber: (inputNum: number,) => string = (inputNum: number) => {
+export const getTwoAfterPointNumber: (inputNum: number) => string = (
+  inputNum: number
+) => {
   let temp = Math.floor(inputNum * 100) / 100;
-  return temp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+  return temp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
 
 export const formatDate = (timestamp: number) => {
   const date = new Date(timestamp);
@@ -11,4 +13,4 @@ export const formatDate = (timestamp: number) => {
   const formattedDate = `${day}-${month}-${year}`;
 
   return formattedDate;
-}
+};

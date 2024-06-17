@@ -1,9 +1,9 @@
-import React from "react";
-import { WagmiProvider, serialize, deserialize } from "wagmi";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
-import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
-import { wagmiConfig } from "./config";
+import React from 'react';
+import { WagmiProvider, serialize, deserialize } from 'wagmi';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
+import { wagmiConfig } from './config';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -15,7 +15,7 @@ const queryClient = new QueryClient({
 
 let persister: any;
 
-if (typeof window !== "undefined") {
+if (typeof window !== 'undefined') {
   persister = createSyncStoragePersister({
     serialize,
     storage: localStorage,
